@@ -1,8 +1,8 @@
 const Command = require("../../structures/Command");
-const { setActive, getLatestMute } = require("../../utils/InfractionUtils");
 const { UnmuteManual } = require("../../utils/moderation/actions");
 const { NonDigits } = require("../../utils/Regex");
 const DatabaseManager = new (require("../../utils/database/DatabaseManager"));
+const InfractionsManager = new (require("../../utils/InfractionsManager"))
 
 module.exports = class extends Command {
 	constructor(...args) {
@@ -57,6 +57,6 @@ module.exports = class extends Command {
 			}),
 		);
 
-		await setActive(await getLatestMute(message.guild.id, target.id), "false");
+		await InfractionsManager.setActive(await InfractionsManager.getLatestMute(message.guild.id, target.id), "false");
 	}
 };

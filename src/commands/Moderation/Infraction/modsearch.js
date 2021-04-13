@@ -1,5 +1,5 @@
 const { ReasonImage } = require("../../../utils/Regex");
-const { getModeratorInfractions } = require("../../../utils/InfractionUtils");
+const InfractionsManager = new (require("../../../utils/InfractionsManager"))
 const { NonDigits } = require("../../../utils/Regex");
 
 const Emotes = require("../../../emotes.json");
@@ -30,7 +30,7 @@ module.exports = {
 			return message.channel.send(await client.bulbutils.translate("global_user_not_found", message.guild.id));
 		}
 
-		const infs = await getModeratorInfractions(message.guild.id, user.id);
+		const infs = await InfractionsManager.getModeratorInfractions(message.guild.id, user.id);
 		for (let i = 0; i < 50; i++) {
 			if (infs[i] === undefined) continue;
 

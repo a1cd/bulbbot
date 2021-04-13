@@ -1,4 +1,4 @@
-const { getInfraction, setReason } = require("../../../utils/InfractionUtils");
+const InfractionsManager = new (require("../../../utils/InfractionsManager"))
 
 module.exports = {
 	Call: async (client, message, args) => {
@@ -12,7 +12,7 @@ module.exports = {
 				}),
 			);
 
-		if (!(await getInfraction(message.guild.id, args[1]))) {
+		if (!(await InfractionsManager.getInfraction(message.guild.id, args[1]))) {
 			return message.channel.send(
 				await client.bulbutils.translate("infraction_not_found", message.guild.id, {
 					infractionId: args[1],
@@ -21,7 +21,7 @@ module.exports = {
 		}
 
 		const reason = args.slice(2).join(" ");
-		await setReason(args[1], reason);
+		await InfractionsManager.setReason(args[1], reason);
 		return message.channel.send(await client.bulbutils.translate("infraction_update_success", message.guild.id, { infractionId: args[1] }));
 	},
 };

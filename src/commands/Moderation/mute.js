@@ -4,7 +4,7 @@ const { NonDigits } = require("../../utils/Regex");
 const DatabaseManager = new (require("../../utils/database/DatabaseManager"));
 const utils = new (require("../../utils/BulbBotUtils"))();
 const parse = require("parse-duration");
-const { getActive, setActive } = require("../../utils/InfractionUtils");
+const InfractionsManager = new (require("../../utils/InfractionsManager"))
 const { TempmuteCreate, TempmuteDelete } = require("../../utils/moderation/temp");
 
 module.exports = class extends Command {
@@ -73,8 +73,8 @@ module.exports = class extends Command {
 
 		const client = this.client;
 		setTimeout(async function () {
-			if ((await getActive(infId)) === "false") return;
-			await setActive(infId, "false");
+			if ((await InfractionsManager.getActive(infId)) === "false") return;
+			await InfractionsManager.setActive(infId, "false");
 
 			infId = await Unmute(
 				client,

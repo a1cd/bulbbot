@@ -1,4 +1,4 @@
-const { deleteInfraction } = require("../../../utils/InfractionUtils");
+const InfractionsManager = new (require("../../../utils/InfractionsManager"))
 
 module.exports = {
 	Call: async (client, message, args) => {
@@ -12,7 +12,7 @@ module.exports = {
 				}),
 			);
 
-		if (!(await deleteInfraction(message.guild.id, args[1]))) {
+		if (!(await InfractionsManager.deleteInfraction(message.guild.id, args[1]))) {
 			return message.channel.send(
 				await client.bulbutils.translate("infraction_not_found", message.guild.id, {
 					infractionId: args[1],

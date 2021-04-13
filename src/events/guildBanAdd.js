@@ -1,6 +1,6 @@
 const Event = require("../structures/Event");
 const { SendModAction } = require("../utils/moderation/log");
-const { createInfraction } = require("../utils/InfractionUtils");
+const InfractionsManager = new (require("../utils/InfractionsManager"))
 
 module.exports = class extends Event {
 	constructor(...args) {
@@ -19,7 +19,7 @@ module.exports = class extends Event {
 		if (executor.id === this.client.user.id) return;
 		if (reason === null) reason = await this.client.bulbutils.translate("global_no_reason", guild.id);
 
-		const infId = await createInfraction(guild.id, "Manual ban", "false", reason, target.tag, target.id, executor.tag, executor.id);
+		const infId = await InfractionsManager.createInfraction(guild.id, "Manual ban", "false", reason, target.tag, target.id, executor.tag, executor.id);
 		await SendModAction(this.client, guild, "manually banned", target, executor, reason, infId);
 	}
 };

@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 const Command = require("./../../structures/Command");
 const { NonDigits } = require("../../utils/Regex");
-const { getOffenderInfractions } = require("../../utils/InfractionUtils");
+const InfractionsManager = new (require("../../utils/InfractionsManager"))
 
 module.exports = class extends Command {
 	constructor(...args) {
@@ -58,7 +58,7 @@ module.exports = class extends Command {
 				user_roles: user.roles._roles.map(r => `${r}`).join(", "),
 			});
 
-		const infs = await getOffenderInfractions(message.guild.id, user.id);
+		const infs = await InfractionsManager.getOffenderInfractions(message.guild.id, user.id);
 		description += await this.client.bulbutils.translate("userinfo_embed_infractions", message.guild.id, { user_infractions: infs.length });
 
 		let color;
