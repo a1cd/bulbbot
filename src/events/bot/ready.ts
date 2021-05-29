@@ -19,6 +19,8 @@ export default class extends Event {
 			},
 		});
 
+		this.client.ws.on("INTERACTION_CREATE", async (interaction: any) => this.client.emit("interactionCreate", interaction));
+
 		console.log(`[CLIENT] ${this.client.user.username} successfully logged and ready`);
 		console.log(`[CLIENT] Listening to ${this.client.events.size} event(s)`);
 		console.log(`[CLIENT] Listening to ${this.client.commands.size} command(s)`);

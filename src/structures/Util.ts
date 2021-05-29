@@ -26,7 +26,7 @@ export default class {
 
 	async loadCommands(): Promise<void> {
 		console.log("[CLIENT] Started registering commands...");
-		return globAsync(`${this.directory}commands/*/*.js`).then(commands => {
+		return globAsync(`${this.directory}commands/*/*.js`).then((commands: any) => {
 			for (const commandFile of commands) {
 				delete require.cache[commandFile];
 				let { name } = path.parse(commandFile);
@@ -37,11 +37,7 @@ export default class {
 				if (!(command instanceof Command)) throw new CommandException(`Event ${name} doesn't belong in commands!`);
 
 				this.client.commands.set(command.name, command);
-				if (command.aliases.length) {
-					for (const alias of command.aliases) {
-						this.client.aliases.set(alias, command.name);
-					}
-				}
+				if (command.aliases.length) for (const alias of command.aliases) this.client.aliases.set(alias, command.name);
 			}
 			console.log("[CLIENT] Successfully registered all commands");
 		});
@@ -49,7 +45,7 @@ export default class {
 
 	async loadEvents(): Promise<void> {
 		console.log("[CLIENT] Started registering events...");
-		return globAsync(`${this.directory}events/**/*.js`).then(events => {
+		return globAsync(`${this.directory}events/**/*.js`).then((events: any) => {
 			for (const eventFile of events) {
 				delete require.cache[eventFile];
 				const { name } = path.parse(eventFile);

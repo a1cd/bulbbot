@@ -2,7 +2,10 @@ import * as Config from "./structures/Config";
 import BulbBotClient from "./structures/BulbBotClient";
 import * as DotEnv from "dotenv";
 import { sequelize } from "./utils/database/connection";
-DotEnv.config();
+
+DotEnv.config({
+	path: `${__dirname}/.env`,
+});
 
 const config = {
 	token: process.env.TOKEN,

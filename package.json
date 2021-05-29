@@ -6,8 +6,9 @@
 	"scripts": {
 		"watch": "tsc -w",
 		"start": "node build/index.js",
-		"dev": "nodemon",
+		"dev": "nodemon build/index.js",
 		"pm2-start": "pm2 start src/index.js --watch --output ./logs/log.log --error ./logs/error.log --time --name bulbbot",
+		"clean-build": "tsc --build --clean",
 		"db-sync": "node src/utils/database/sync.js"
 	},
 	"repository": "git+https://github.com/TestersQTs/Bulbbot.git",
