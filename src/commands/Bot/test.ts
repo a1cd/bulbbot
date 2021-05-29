@@ -17,8 +17,8 @@ export default class extends Command {
 
 	async run(message: Message): Promise<void> {
 		const frame = new MessageFramework({ listener: message });
-		const btn = new MessageButton().setLabel("hi").setStyle("red").setID("hi");
-		const btn2 = new MessageButton().setLabel("hi").setStyle("red").setID("hi");
+		const btn = new MessageButton().setLabel("hi").setStyle("red").setId("hi");
+		const btn2 = new MessageButton().setLabel("hi").setStyle("red").setId("hi");
 
 		frame.sendBtn(this.client, "hi", [btn, btn2]);
 	}

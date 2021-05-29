@@ -1,14 +1,12 @@
-import { Util } from "discord.js";
-
 const styles = {
 	blurple: 1,
 	gray: 2,
 	green: 3,
 	red: 4,
-	url: 5,
+	gray_url: 5,
 };
 
-function resolveStyle(style) {
+function resolveStyle(style: string) {
 	if (!style || style === undefined || style === null) throw new TypeError("NO_BUTTON_STYLE: Please provide button style");
 	if (!styles[style] || styles[style] === undefined || styles[style] === null) throw new TypeError("INVALID_BUTTON_STYLE: An invalid button styles was provided");
 
@@ -30,44 +28,42 @@ export default class MessageButton {
 
 	main(data: any) {
 		if (data.style && data.style == "gray") data.style = "grey";
-		this.style = "style" in data ? resolveStyle(Util.resolveString(data.style)) : null;
+		this.style = "style" in data ? resolveStyle(data.style) : null;
 
 		this.type = 2;
-		this.label = "label" in data ? Util.resolveString(data.label) : null;
+		this.label = "label" in data ? data.label : null;
 		this.disabled = "disabled" in data ? Boolean(data.disabled) : false;
 
-		if (this.style === 5) this.url = "url" in data ? Util.resolveString(data.url) : null;
-		else this.custom_id = "id" in data ? Util.resolveString(data.id) : null;
+		if (this.style === 5) this.url = "url" in data ? data.url : null;
+		else this.custom_id = "id" in data ? data.id : null;
 
 		//this.emoji = "";
 
 		return this;
 	}
 
-	setStyle(style) {
-		style = resolveStyle(Util.resolveString(style));
-		this.style = style;
+	setStyle(style: string) {
+		this.style = resolveStyle(style);
 		return this;
 	}
 
-	setLabel(label) {
-		label = Util.resolveString(label);
+	setLabel(label: string) {
 		this.label = label;
 		return this;
 	}
 
-	setDisabled(boolean = true) {
+	setDisabled(boolean: boolean = true) {
 		this.disabled = boolean;
 		return this;
 	}
 
-	setURL(url) {
-		this.url = this.style === 5 ? Util.resolveString(url) : null;
+	setURL(url: string) {
+		this.url = this.style === 5 ? url : null;
 		return this;
 	}
 
-	setID(id) {
-		this.custom_id = this.style === 5 ? null : Util.resolveString(id);
+	setId(id: string) {
+		this.custom_id = this.style === 5 ? null : id;
 		return this;
 	}
 
