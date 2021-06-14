@@ -6,7 +6,7 @@
 	"scripts": {
 		"watch": "tsc -w",
 		"start": "node build/index.js",
-		"dev": "nodemon",
+		"dev": "nodemon build/index.js",
 		"pm2-start": "pm2 start src/index.js --watch --output ./logs/log.log --error ./logs/error.log --time --name bulbbot",
 		"db-sync": "node src/utils/database/sync.js"
 	},
@@ -23,6 +23,7 @@
 		"@sentry/node": "^6.2.5",
 		"@sentry/tracing": "^6.2.5",
 		"axios": "^0.21.1",
+		"chalk": "^4.1.1",
 		"discord.js": "^12.5.3",
 		"discord.js-pagination": "^1.0.3",
 		"dotenv": "^8.2.0",
@@ -38,7 +39,8 @@
 		"sequelize": "^6.6.2",
 		"sharp": "^0.28.1",
 		"shelljs": "^0.8.4",
-		"unicode": "^12.1.0"
+		"unicode": "^12.1.0",
+		"winston": "^3.3.3"
 	},
 	"devDependencies": {
 		"@messageformat/core": "^3.0.0-beta.3",

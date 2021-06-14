@@ -184,6 +184,7 @@ export default class {
 
 		const staff: number = 1 << 0;
 		const partner: number = 1 << 1;
+		const certfiedModerator: number = 1 << 18;
 		const hypesquad_events: number = 1 << 2;
 		const bughunter_green: number = 1 << 3;
 		const hypesquad_bravery: number = 1 << 6;
@@ -195,6 +196,7 @@ export default class {
 
 		if ((bitfield & staff) === staff) badges.push(Emotes.flags.DISCORD_EMPLOYEE);
 		if ((bitfield & partner) === partner) badges.push(Emotes.flags.PARTNERED_SERVER_OWNER);
+		if ((bitfield & certfiedModerator) === certfiedModerator) badges.push(Emotes.flags.CERTIFIED_MODERATOR);
 		if ((bitfield & hypesquad_events) === hypesquad_events) badges.push(Emotes.flags.HYPESQUAD_EVENTS);
 		if ((bitfield & hypesquad_bravery) === hypesquad_bravery) badges.push(Emotes.flags.HOUSE_BRAVERY);
 		if ((bitfield & hypesquad_brilliance) === hypesquad_brilliance) badges.push(Emotes.flags.HOUSE_BRILLIANCE);
